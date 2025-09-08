@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { FaRegUser, FaShoppingCart, FaChevronDown, FaSearch, FaMapMarkerAlt } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
   const [activeCategory, setActiveCategory] = useState('All');
@@ -83,11 +84,12 @@ const Header = () => {
                 <span className="bg-red-100 text-red-700 px-2.5 py-1 rounded text-xs font-semibold">
                   COD
                 </span>
+                {/* <Link to ="/cart"><span className="text-xs font-medium">Cart</span></Link> */}
               </div>
 
               {/* Profile */}
               <button className="p-2 text-gray-700 transition-colors hover:text-red-600">
-                <FaRegUser className="w-5 h-5" />
+                <Link to="/profile"><FaRegUser className="w-5 h-5" /></Link>
               </button>
             </div>
           </div>
@@ -104,6 +106,7 @@ const Header = () => {
               placeholder='Search for "cheese slices"'
               className="w-full pl-12 pr-4 py-2.5 bg-gray-100 border-0 rounded-lg focus:ring-2 focus:ring-red-500 focus:bg-white outline-none text-sm transition-all"
             />
+             
           </div>
         </div>
       </header>
@@ -177,7 +180,7 @@ const Header = () => {
           
           <button className="flex flex-col items-center justify-center text-gray-600 px-3 py-2 relative">
             <div className="text-lg mb-1">🛒</div>
-            <span className="text-xs font-medium">Cart</span>
+            {/* <Link to ="/cart"><span className="text-xs font-medium">Cart</span></Link> */}
             <span className="absolute -top-1 -right-1 bg-red-600 text-white rounded-full w-4 h-4 flex items-center justify-center text-xs">0</span>
           </button>
         </div>

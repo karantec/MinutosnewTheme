@@ -3,6 +3,8 @@ import { Routes, Route } from 'react-router-dom';
 import { Home, Error404 } from './pages';
 import { Loader } from './components/shared';
 import Layout from './components/Layout';
+import CartDrawer from './components/shared/Cart';
+import SettingsPage from './components/shared/Profile';
 const ProductView = React.lazy(() => import('./pages/ProductView'));
 
 const AppWithRouting = () => {
@@ -20,6 +22,15 @@ const AppWithRouting = () => {
       <Route
         path="/not-found"
         element={<Layout noFooter={true} component={<Error404 />} />}
+      />
+
+      <Route
+        path="/cart"
+        element={<CartDrawer/>}
+      />
+      <Route
+        path="/profile"
+        element={<SettingsPage/>}
       />
       <Route
         path="*"
