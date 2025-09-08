@@ -196,7 +196,7 @@ const Header = () => {
             {/* Left Section - Logo */}
             <div className="flex items-center space-x-2 sm:space-x-6">
               <div className="flex items-center">
-                <span className="text-xl sm:text-2xl font-bold text-red-600 tracking-tight">minutos</span>
+                <Link to="/"><span className="text-xl sm:text-2xl font-bold text-red-600 tracking-tight">minutos</span></Link>
               </div>
               
               {/* Express Delivery Badge - Desktop only */}

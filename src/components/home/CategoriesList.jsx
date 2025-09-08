@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import Categories from '../../lib/data/categories.json';
 
 const CategoriesList = () => {
@@ -10,11 +11,11 @@ const CategoriesList = () => {
             className="bg-white rounded-lg p-3 shadow-sm border border-gray-100 hover:shadow-md transition-shadow cursor-pointer"
           >
             <div className="aspect-square mb-2 flex items-center justify-center bg-gray-50 rounded-lg overflow-hidden">
-              <img 
+              <Link to ="/subCategory"><img 
                 src={`categories/${c.coverFile}`} 
                 className="w-full h-full object-cover" 
                 alt={c.title} 
-              />
+              /></Link> 
             </div>
             <div className="text-center">
               <h3 className="text-sm font-medium text-gray-800 leading-tight">
