@@ -1,8 +1,6 @@
 import { Link } from 'react-router-dom';
 
-type Props = {};
-
-const NotAvailable = (props: Props) => {
+const NotAvailable = () => {
   return (
     <div className="_container flex md:justify-center pt-12 px-4 h-[80vh]">
       <div className="flex gap-20 h-full items-center">

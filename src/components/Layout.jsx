@@ -7,12 +7,7 @@ import Modal from './Modal';
 import { CartPanel } from './cart';
 import { useAppSelector } from '../hooks/useAppSelector';
 
-type Props = {
-  noFooter?: boolean;
-  component: React.ReactElement;
-};
-
-const Layout = ({ noFooter, component }: Props) => {
+const Layout = ({ noFooter, component }) => {
   const modalShown = useAppSelector((state) => state.modal.visible);
   const cartShown = useAppSelector((state) => state.ui.cartPanel);
 

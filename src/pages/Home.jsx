@@ -9,7 +9,7 @@ import {
 import Misc from '../lib/data/layout.json';
 
 const Home = () => {
-  const productItems: any[] = Misc.filter((item) => item.type === 77).map(
+  const productItems = Misc.filter((item) => item.type === 77).map(
     (el) => ({
       data: el.data,
       objects: el.objects,

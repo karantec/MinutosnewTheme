@@ -1,9 +1,8 @@
-import { ProductRow } from '../../utils/types';
 import ItemsCarousel from '../shared/ItemsCarousel';
 
-const ProductsRow = ({ data, objects }: ProductRow) => {
+const ProductsRow = ({ data, objects }) => {
   const products = objects.map((obj) =>
-    obj.data.products.map((product: any) => product[0])
+    obj.data.products.map((product) => product[0])
   )[0];
 
   return (

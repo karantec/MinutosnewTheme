@@ -1,7 +1,6 @@
 import Carousel from 'react-multi-carousel';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { show as showModal } from '../../store/modal';
-import { DiscountOffer } from '../../utils/types';
 import Offers from '../../lib/data/discountOffers.json';
 import CarouselButtonGroup from '../CarouselButtonGroup';
 import 'react-multi-carousel/lib/styles.css';
@@ -40,18 +39,15 @@ const responsive = {
   },
 };
 
-const DiscountCard = ({ data }: { data: DiscountOffer }) => {
+const DiscountCard = ({ data }) => {
   const dispatch = useAppDispatch();
-  const [codeCopied, setCodeCopied] = useState<boolean>(false);
+  const [codeCopied, setCodeCopied] = useState(false);
 
-  const showDiscountInfo = (): void => {
+  const showDiscountInfo = () => {
     dispatch(showModal({ data, type: 'discount' }));
   };
 
-  const copyCouponCode = async (
-    e: React.MouseEvent<HTMLButtonElement>,
-    text: string
-  ) => {
+  const copyCouponCode = async (e, text) => {
     e.stopPropagation();
     if ('clipboard' in navigator) {
       try {
@@ -112,8 +108,7 @@ const DiscountCard = ({ data }: { data: DiscountOffer }) => {
 };
 
 const DiscountOffers = () => {
-  const allOffers = Offers as DiscountOffer[];
-  // console.log('allOffers', allOffers);
+  const allOffers = Offers;
 
   return (
     <section>

@@ -18,7 +18,7 @@ const responsive = {
   },
 };
 
-const ProductGallery = ({ images }: { images: string[] }) => {
+const ProductGallery = ({ images }) => {
   const [coverIndex, setCoverIndex] = useState(0);
   return (
     <div className="flex flex-col mb-6 lg:mb-0 lg:border-b _border-muted">

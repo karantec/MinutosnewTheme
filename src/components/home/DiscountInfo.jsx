@@ -1,19 +1,10 @@
 import { useState } from 'react';
 import { IoClose } from 'react-icons/io5';
-import { DiscountOffer } from '../../utils/types';
 
-type DiscountInfoProps = {
-  data: DiscountOffer | null;
-  onClose: (e: React.MouseEvent<HTMLButtonElement>) => void;
-};
+const DiscountInfo = ({ data, onClose }) => {
+  const [codeCopied, setCodeCopied] = useState(false);
 
-const DiscountInfo = ({ data, onClose }: DiscountInfoProps) => {
-  const [codeCopied, setCodeCopied] = useState<boolean>(false);
-
-  const copyCouponCode = async (
-    e: React.MouseEvent<HTMLButtonElement>,
-    text: string
-  ) => {
+  const copyCouponCode = async (e, text) => {
     e.stopPropagation();
     if ('clipboard' in navigator) {
       try {

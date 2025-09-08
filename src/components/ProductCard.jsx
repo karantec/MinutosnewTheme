@@ -1,13 +1,12 @@
 import { useNavigate } from 'react-router-dom';
 import AddToCartButton from './shared/AddToCartButton';
-import { CartProduct, ProductItem } from '../utils/types';
 import { convertTextToURLSlug } from '../utils/helper';
 
-const ProductCard = ({ data }: { data: ProductItem }) => {
+const ProductCard = ({ data }) => {
   const navigate = useNavigate();
   const { product_id, name, unit, price, mrp, image_url, discount } = data;
 
-  const cartProduct: CartProduct = {
+  const cartProduct = {
     id: product_id.toString(),
     title: name,
     subTitle: unit,

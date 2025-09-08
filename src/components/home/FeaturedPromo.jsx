@@ -39,7 +39,7 @@ const responsive = {
 
 const FeaturedPromo = () => {
   const allPromos = Misc.filter((item) => item.type === 66)[0].objects?.map(
-    (el: any) => el.data.image_url
+    (el) => el.data.image_url
   );
 
   const promos = shuffleItems(allPromos);

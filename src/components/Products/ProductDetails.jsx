@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { IoCaretForwardSharp } from 'react-icons/io5';
 import { Link } from 'react-router-dom';
 import { getProductForCart } from '../../utils/helper';
-import { ProductItemDetailed } from '../../utils/types';
 import { allFeatures } from '../BrandPromotion';
 import { AddToCartButton } from '../shared';
 import Breadcrumb from './Breadcrumb';
@@ -10,14 +9,11 @@ import ProductGallery from './ProductGallery';
 import ProductInfoList from './ProductInfoList';
 import ProductVarients from './ProductVarients';
 
-const ProductDetails = (props: any) => {
-  const {
-    product,
-    varients,
-  }: { product: ProductItemDetailed; varients: ProductItemDetailed[] } = props;
+const ProductDetails = (props) => {
+  const { product, varients } = props;
 
   const allVarients = [product, ...varients];
-  const [itemIndex, setItemIndex] = useState<number>(0);
+  const [itemIndex, setItemIndex] = useState(0);
   const currentProduct = allVarients[itemIndex];
   const productAsCartItem = getProductForCart(currentProduct);
 

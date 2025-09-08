@@ -3,13 +3,8 @@ import { IoAddSharp, IoRemoveSharp } from 'react-icons/io5';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { useAppSelector } from '../../hooks/useAppSelector';
 import { addItem, removeItem } from '../../store/cart';
-import { CartProduct } from '../../utils/types';
 
-type ButtonProps = {
-  product: CartProduct;
-  size?: 'sm' | 'lg';
-};
-const AddToCartButton = ({ product, size }: ButtonProps) => {
+const AddToCartButton = ({ product, size }) => {
   const { cartItems } = useAppSelector((state) => state.cart);
   const dispatch = useAppDispatch();
 
@@ -18,17 +13,17 @@ const AddToCartButton = ({ product, size }: ButtonProps) => {
   )[0];
   const itemCount = itemInCart ? itemInCart.quantity : 0;
 
-  const add = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const add = (e) => {
     e.stopPropagation();
     dispatch(addItem({ ...product }));
   };
 
-  const remove = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const remove = (e) => {
     e.stopPropagation();
     dispatch(removeItem(product.id));
   };
 
-  const handleItemAdd = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const handleItemAdd = (e) => {
     e.stopPropagation();
     dispatch(
       addItem({

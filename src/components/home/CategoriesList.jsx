@@ -1,8 +1,6 @@
 import Categories from '../../lib/data/categories.json';
 
-type Props = {};
-
-const CategoriesList = (props: Props) => {
+const CategoriesList = () => {
   return (
     <section className="my-4">
       <div className="grid grid-cols-2 xs:grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 xl:grid-cols-10 my-2">

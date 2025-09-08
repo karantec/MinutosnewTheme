@@ -1,8 +1,7 @@
 import React from 'react';
-import { Attribute, AttributeCollection } from '../../utils/types';
 
-const ProductInfoList = (props: AttributeCollection[] = []) => {
-  const allAttr: Attribute[] = [];
+const ProductInfoList = (props = []) => {
+  const allAttr = [];
   Object.values(props).forEach((prop) => allAttr.push(...prop.attributes));
   const discalimerIndex = allAttr.findIndex(
     (item) => item.title === 'Disclaimer'

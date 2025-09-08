@@ -4,8 +4,6 @@ import { shuffleItems } from '../../utils/helper';
 import 'react-multi-carousel/lib/styles.css';
 import Misc from '../../lib/data/layout.json';
 
-type Props = {};
-
 const responsive = {
   allScreen: {
     breakpoint: { max: 1920, min: 0 },
@@ -13,9 +11,9 @@ const responsive = {
   },
 };
 
-const HighlightedPromo = (props: Props) => {
+const HighlightedPromo = () => {
   const allPromos = Misc.filter((item) => item.type === 0)[0].objects?.map(
-    (el: any) => el.data
+    (el) => el.data
   );
   const promos = shuffleItems(allPromos);
   return (

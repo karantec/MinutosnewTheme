@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom';
-import { ProductItemDetailed } from '../../utils/types';
 
-const Breadcrumb = (props: ProductItemDetailed) => {
+const Breadcrumb = (props) => {
   const { level0_category, level1_category, name } = props;
 
   const category = level0_category[0];

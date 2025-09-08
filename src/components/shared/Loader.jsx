@@ -1,4 +1,4 @@
-const Loader = ({ fullscreen }: { fullscreen?: boolean }) => {
+const Loader = ({ fullscreen }) => {
   const loaderImg = (
     <span className="w-3 h-3 rounded-full my-6 mx-auto block relative text-[#0c831f] _loader"></span>
   );

@@ -1,11 +1,6 @@
 import { ItemsCarousel } from '../home';
 
-type MoreProductsProps = {
-  title: string;
-  products: any[];
-};
-
-const MoreProducts = ({ title, products }: MoreProductsProps) => {
+const MoreProducts = ({ title, products }) => {
   return (
     <section className="mt-2">
       <div className="flex items-center justify-between h-16">

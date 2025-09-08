@@ -2,7 +2,6 @@ import { useState } from 'react';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import CarouselButtonGroup from '../CarouselButtonGroup';
-import { ProductItemDetailed } from '../../utils/types';
 
 const responsive = {
   lgdesktop: {
@@ -23,18 +22,7 @@ const responsive = {
   },
 };
 
-type Props = {
-  data: ProductItemDetailed[];
-  onSelect: (arg: number) => void;
-};
-
-const VarientItem = ({
-  data,
-  onSelect,
-}: {
-  data: any;
-  onSelect: () => void;
-}) => {
+const VarientItem = ({ data, onSelect }) => {
   return (
     <div
       onClick={() => onSelect()}
@@ -71,7 +59,7 @@ const VarientItem = ({
   );
 };
 
-const ProductVarients = ({ data, onSelect }: Props) => {
+const ProductVarients = ({ data, onSelect }) => {
   const varientList = data.map((item) => {
     const { product_id, price, mrp, unit, offer, inventory } = item;
     return {
@@ -84,8 +72,8 @@ const ProductVarients = ({ data, onSelect }: Props) => {
     };
   });
 
-  const [currentIndex, setCurrentIndex] = useState<number>(0);
-  const handleVarientChange = (e: number) => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const handleVarientChange = (e) => {
     setCurrentIndex(() => e);
     onSelect(e);
   };

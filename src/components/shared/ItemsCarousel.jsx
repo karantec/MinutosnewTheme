@@ -1,13 +1,8 @@
 import Carousel from 'react-multi-carousel';
 import { shuffleItems } from '../../utils/helper';
-import { ProductItem } from '../../utils/types';
 import CarouselButtonGroup from '../CarouselButtonGroup';
 import ProductCard from '../ProductCard';
 import 'react-multi-carousel/lib/styles.css';
-
-type Props = {
-  topItems: ProductItem[];
-};
 
 const responsive = {
   uhdDesktop: {
@@ -54,7 +49,7 @@ const responsive = {
   },
 };
 
-const ItemsCarousel = (props: Props) => {
+const ItemsCarousel = (props) => {
   const items = shuffleItems(props.topItems);
 
   return (

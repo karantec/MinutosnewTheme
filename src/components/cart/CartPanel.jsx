@@ -3,13 +3,12 @@ import { FiChevronRight } from 'react-icons/fi';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { useAppSelector } from '../../hooks/useAppSelector';
 import { hideCart } from '../../store/ui';
-import { CartItem, ProductItem } from '../../utils/types';
 import AddToCartButton from '../shared/AddToCartButton';
 import Misc from '../../lib/data/layout.json';
 import SuggestedItems from './SuggestedItems';
 import { shuffleItems } from '../../utils/helper';
 
-const CartPanelItem = (props: CartItem) => {
+const CartPanelItem = (props) => {
   const { image, title, subTitle, price, mrp } = props.product;
   return (
     <div className="flex p-4 gap-4 border-t _border-muted">
@@ -49,13 +48,13 @@ const CartPanel = () => {
   const dispatch = useAppDispatch();
   const { totalAmount, totalQuantity, cartItems, billAmount, discount } =
     useAppSelector((state) => state.cart);
-  const productItems: any[] = Misc.filter((item) => item.type === 77).map(
+  const productItems = Misc.filter((item) => item.type === 77).map(
     (el) => el.objects
   );
-  const allProducts: ProductItem[] = [];
+  const allProducts = [];
 
-  productItems.forEach((obj: any) => {
-    const items = obj[0].data.products.map((product: any) => product[0]);
+  productItems.forEach((obj) => {
+    const items = obj[0].data.products.map((product) => product[0]);
     allProducts.push(...items);
   });
   const addedProducts = cartItems.map((item) => item.product.id);

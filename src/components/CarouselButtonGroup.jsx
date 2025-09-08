@@ -1,11 +1,6 @@
 import { IoChevronBack, IoChevronForwardSharp } from 'react-icons/io5';
 
-type Props = {
-  icon: 'prev' | 'next';
-  onButtonClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
-};
-
-const CarouselButton = (props: Props) => {
+const CarouselButton = (props) => {
   const icon =
     props.icon === 'prev' ? (
       <IoChevronBack size={20} />
@@ -23,7 +18,7 @@ const CarouselButton = (props: Props) => {
   );
 };
 
-const CarouselButtonGroup = ({ next, previous, ...rest }: any) => {
+const CarouselButtonGroup = ({ next, previous, ...rest }) => {
   const {
     carouselState: { currentSlide, slidesToShow, totalItems },
   } = rest;
