@@ -5,6 +5,7 @@ import { Loader } from './components/shared';
 import Layout from './components/Layout';
 import CartDrawer from './components/shared/Cart';
 import SettingsPage from './components/shared/Profile';
+import FruitsVegetablesComponent from './components/shared/SubCategory';
 const ProductView = React.lazy(() => import('./pages/ProductView'));
 
 const AppWithRouting = () => {
@@ -27,6 +28,10 @@ const AppWithRouting = () => {
       <Route
         path="/cart"
         element={<CartDrawer/>}
+      />
+      <Route
+        path="/subCategory"
+        element={<FruitsVegetablesComponent/>}
       />
       <Route
         path="/profile"
