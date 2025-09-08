@@ -8,19 +8,19 @@ import PlayStoreLogo from '../assets/images/play-store.webp';
 
 export const allFeatures = [
   {
-    imgSrc: Feat1,
+    // imgSrc: Feat1,
     text: 'Open the app',
     description:
       'Choose from over 7000 products across groceries, fresh fruits & veggies, meat, pet care, beauty items & more.',
   },
   {
-    imgSrc: Feat2,
+    // imgSrc: Feat2,
     text: 'Place an order',
     description:
       'Add your favourite items to the cart & avail the best offers.',
   },
   {
-    imgSrc: Feat3,
+    // imgSrc: Feat3,
     text: 'Get free delivery',
     description:
       'Experience lighting-fast speed & get all your items delivered in 10 minutes',
