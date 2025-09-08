@@ -98,27 +98,30 @@ const Header = () => {
       {/* Category Navigation */}
       <nav className="bg-white border-b border-gray-100">
         <div className="px-4 lg:px-6">
-          <div className="flex items-center space-x-6 h-12 overflow-x-auto scrollbar-hide">
-            {categories.map((category) => (
-              <button
-                key={category.id}
-                className={`flex items-center space-x-2 whitespace-nowrap pb-2 transition-colors ${
-                  activeCategory === category.name 
-                    ? 'text-red-600 font-medium border-b-2 border-red-600' 
-                    : 'text-gray-600 hover:text-red-600'
-                }`}
-                onClick={() => setActiveCategory(category.name)}
-              >
-                <div className={`w-5 h-5 rounded flex items-center justify-center ${
-                  activeCategory === category.name ? 'bg-red-100' : 'bg-gray-100'
-                }`}>
-                  <span className="text-xs">{category.icon}</span>
-                </div>
-                <span className="text-sm font-medium">{category.name}</span>
-              </button>
-            ))}
-          </div>
+  <div className="flex justify-center items-center gap-6 h-12 overflow-x-auto scrollbar-hide">
+    {categories.map((category) => (
+      <button
+        key={category.id}
+        className={`flex items-center gap-2 whitespace-nowrap pb-2 transition-colors ${
+          activeCategory === category.name 
+            ? 'text-red-600 font-medium border-b-2 border-red-600' 
+            : 'text-gray-600 hover:text-red-600'
+        }`}
+        onClick={() => setActiveCategory(category.name)}
+      >
+        <div
+          className={`w-5 h-5 rounded flex items-center justify-center ${
+            activeCategory === category.name ? 'bg-red-100' : 'bg-gray-100'
+          }`}
+        >
+          <span className="text-xs">{category.icon}</span>
         </div>
+        <span className="text-sm font-medium">{category.name}</span>
+      </button>
+    ))}
+  </div>
+</div>
+
       </nav>
     </div>
   );

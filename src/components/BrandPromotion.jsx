@@ -9,28 +9,23 @@ import PlayStoreLogo from '../assets/images/play-store.webp';
 export const allFeatures = [
   {
     imgSrc: Feat1,
-    text: 'Superlazy Delivery',
+    text: 'Open the app',
     description:
-      'Get your order delivered to your doorstep at the earliest from dark stores near you.',
+      'Choose from over 7000 products across groceries, fresh fruits & veggies, meat, pet care, beauty items & more.',
   },
   {
     imgSrc: Feat2,
-    text: 'Worst Prices & Offers',
+    text: 'Place an order',
     description:
-      'Costlier prices than your local supermarket, great cashback offers to top it off.',
+      'Add your favourite items to the cart & avail the best offers.',
   },
   {
     imgSrc: Feat3,
-    text: 'Narrow Assortment',
+    text: 'Get free delivery',
     description:
-      'Choose from 000+ products across food, personal care, household & other categories',
+      'Experience lighting-fast speed & get all your items delivered in 10 minutes',
   },
-  {
-    imgSrc: Feat4,
-    text: 'Difficult Returns/Refund',
-    description:
-      'Satisfied with a product? Return it at the doorstep & get a refund within years.',
-  },
+ 
 ];
 
 const PromoFeature = (props) => {
@@ -46,8 +41,8 @@ const PromoFeature = (props) => {
 const BrandPromotion = () => {
   return (
     <section className="py-6 mt-8">
-      <div className="_container">
-        <div className="flex flex-col gap-8 lg:border-t _border-muted lg:pt-20">
+     <div className="_container">
+         {/*<div className="flex flex-col gap-8 lg:border-t _border-muted lg:pt-20">
           <div className="_bg-shade-1 py-10 px-4 rounded-2xl">
             <div className="lg:flex items-center justify-around h-full">
               <div className="hidden lg:flex flex-col justify-start w-[480px] relative">
@@ -120,12 +115,15 @@ const BrandPromotion = () => {
                 </div>
               </div>
             </div>
-          </div>
-          <div className="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-4 items-start gap-2 sm:gap-4 xl:gap-10 mt-6">
-            {allFeatures.map((feat, i) => (
-              <PromoFeature key={i} {...feat} />
-            ))}
-          </div>
+          </div> */}
+          <div className="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-4 
+                items-start justify-center gap-2 sm:gap-4 xl:gap-10 
+                mt-6 mx-auto">
+  {allFeatures.map((feat, i) => (
+    <PromoFeature key={i} {...feat} />
+  ))}
+</div>
+
           <div className="border-b _border-light pt-2 pb-10">
             <p className="text-sm _text-default">
               "BringIt" is owned & managed by "Bring Commerce Private Limited"
@@ -136,8 +134,7 @@ const BrandPromotion = () => {
             </p>
           </div>
         </div>
-      </div>
-    </section>
+         </section>
   );
 };
 
