@@ -11,11 +11,15 @@
   -webkit-text-size-adjust: 100%;
 
   --container-max-width: 1280px;
-  --green-shade-1: rgb(236, 255, 236);
-  --green-shade-2: rgb(226, 249, 226);
+
+  /* 🔴 Red Shades */
+  --red-shade-1: rgb(255, 240, 240);
+  --red-shade-2: rgb(255, 228, 228);
+
   --border-default-color: rgb(221, 221, 221);
   --border-muted-color: rgb(238, 238, 238);
 
+  /* Shadows */
   --nav-shadow: rgb(0 0 0 / 7%) 0px 0px 10px 0px;
   --searchbox-shadow: rgb(28 28 28 / 8%) 0px 2px 8px;
   --couponcard-shadow: rgb(28 28 28 / 15%) 0px 2px 4px;
@@ -38,10 +42,10 @@ html {
     max-width: var(--container-max-width);
   }
   ._bg-shade-1 {
-    background: var(--green-shade-1);
+    background: var(--red-shade-1);
   }
   ._bg-shade-2 {
-    background: var(--green-shade-2);
+    background: var(--red-shade-2);
   }
   ._text-default {
     @apply text-neutral-700;
@@ -82,16 +86,16 @@ html {
   }
   ._card:hover {
     box-shadow: var(--box-shadow);
-    border: 0.5px solid rgb(146, 206, 116);
+    border: 0.5px solid rgb(220, 53, 69); /* 🔴 Red border on hover */
   }
   ._fab {
     @apply rounded-full cursor-pointer flex items-center justify-center;
     box-shadow: var(--floatingBtn-shadow);
   }
   ._add_to_cart {
-    @apply h-full w-full rounded-lg uppercase font-bold text-green-700;
-    background: rgb(247, 255, 249);
-    border: 0.5px solid rgb(12, 131, 31);
+    @apply h-full w-full rounded-lg uppercase font-bold text-red-700;
+    background: rgb(255, 245, 245);
+    border: 0.5px solid rgb(220, 53, 69);
   }
   ._swinging {
     animation-name: swigning;
@@ -113,9 +117,10 @@ html {
 }
 
 input[type='radio'] {
-  accent-color: rgb(12, 131, 31);
+  accent-color: rgb(220, 53, 69); /* 🔴 Red accent */
 }
 
+/* Mobile */
 @media screen and (max-width: 640px) {
   ._nav {
     box-shadow: none;
@@ -138,15 +143,14 @@ input[type='radio'] {
   }
 }
 
+/* Animations */
 @keyframes swigning {
   0% {
     transform: translate(40%, -41%);
   }
-
   50% {
     transform: translate(53%, -45%);
   }
-
   100% {
     transform: translate(40%, -41%);
   }
@@ -156,15 +160,12 @@ input[type='radio'] {
   0% {
     transform: rotate(0deg);
   }
-
   25% {
     transform: rotate(10deg);
   }
-
   75% {
     transform: rotate(-10deg);
   }
-
   100% {
     transform: rotate(0deg);
   }
