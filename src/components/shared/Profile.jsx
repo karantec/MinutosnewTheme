@@ -29,10 +29,10 @@ export default function SettingsPage() {
           <div className="flex flex-col items-center justify-center text-center px-4">
             <div className="text-4xl sm:text-6xl mb-4">🧾</div>
             <h2 className="text-lg sm:text-xl font-semibold mb-4">No orders yet</h2>
-            <button className="w-full sm:w-auto mt-4 px-6 py-3 border border-purple-500 text-purple-700 rounded-lg hover:bg-purple-50 transition-colors">
+            <button className="w-full sm:w-auto mt-4 px-6 py-3 border border-red-600 text-red-600 rounded-lg hover:bg-red-50 transition-colors">
               Browse products
             </button>
-            <button className="w-full sm:w-auto mt-3 px-6 py-3 border border-pink-500 text-pink-500 rounded-lg hover:bg-pink-50 transition-colors">
+            <button className="w-full sm:w-auto mt-3 px-6 py-3 border border-red-400 text-red-500 rounded-lg hover:bg-red-50 transition-colors">
               ↓ Load More
             </button>
           </div>
@@ -76,7 +76,7 @@ export default function SettingsPage() {
 
   const handleMenuClick = (pageId) => {
     setActivePage(pageId);
-    setSidebarOpen(false); // Close sidebar on mobile after selection
+    setSidebarOpen(false);
   };
 
   return (
@@ -84,7 +84,7 @@ export default function SettingsPage() {
       {/* Top Header */}
       <Header />
 
-      <div className="flex-1 flex justify-center px-2 sm:px-4 relative">
+      <div className="flex-1 flex pt-5 justify-center px-2 sm:px-4 relative">
         <div className="flex w-full max-w-6xl relative bg-gray-50">
           {/* Mobile Menu Button */}
           <button
@@ -111,8 +111,8 @@ export default function SettingsPage() {
             <div className="p-4 flex-1 overflow-y-auto">
               {/* Profile Info */}
               <div className="flex items-center space-x-3 mb-6 pt-16 lg:pt-0">
-                <div className="w-12 h-12 rounded-full bg-purple-100 flex items-center justify-center flex-shrink-0">
-                  <FaUser className="text-purple-700 text-xl" />
+                <div className="w-12 h-12 rounded-full bg-red-100 flex items-center justify-center flex-shrink-0">
+                  <FaUser className="text-red-600 text-xl" />
                 </div>
                 <div className="min-w-0">
                   <h2 className="font-bold text-sm sm:text-base truncate">KARAN RANA</h2>
@@ -121,12 +121,12 @@ export default function SettingsPage() {
               </div>
 
               {/* Wallet Offer */}
-              <div className="bg-green-700 text-white p-4 rounded-lg mb-4">
+              <div className="bg-red-600 text-white p-4 rounded-lg mb-4">
                 <p className="text-sm">
                   You would potentially save{" "}
                   <span className="font-semibold">₹500</span> per month with Minutos Daily
                 </p>
-                <button className="mt-2 px-3 py-1 bg-yellow-400 text-black rounded-md text-sm font-medium hover:bg-yellow-300 transition-colors w-full sm:w-auto">
+                <button className="mt-2 px-3 py-1 bg-white text-red-600 rounded-md text-sm font-medium hover:bg-gray-100 transition-colors w-full sm:w-auto">
                   Get Daily
                 </button>
               </div>
@@ -136,7 +136,7 @@ export default function SettingsPage() {
                 <h3 className="text-sm font-medium">Minutos Cash & Gift Card</h3>
                 <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mt-2 gap-2">
                   <p className="text-gray-500 text-sm">Available Balance: ₹0</p>
-                  <button className="px-3 py-1 bg-black text-white text-sm rounded-lg hover:bg-gray-800 transition-colors w-full sm:w-auto">
+                  <button className="px-3 py-1 bg-red-600 text-white text-sm rounded-lg hover:bg-red-700 transition-colors w-full sm:w-auto">
                     Add Balance
                   </button>
                 </div>
@@ -150,8 +150,8 @@ export default function SettingsPage() {
                     onClick={() => handleMenuClick(item.id)}
                     className={`flex items-center space-x-3 w-full px-4 py-3 rounded-md text-left mb-2 transition-colors ${
                       activePage === item.id
-                        ? "bg-gray-100 text-black font-medium"
-                        : "text-gray-700 hover:bg-gray-100"
+                        ? "bg-red-50 text-red-600 font-medium"
+                        : "text-gray-700 hover:bg-red-50"
                     }`}
                   >
                     <span className="flex-shrink-0">{item.icon}</span>
@@ -161,7 +161,7 @@ export default function SettingsPage() {
               </div>
 
               {/* Logout */}
-              <button className="mt-6 text-red-500 font-semibold w-full text-left px-4 py-2 hover:bg-red-50 rounded-md transition-colors">
+              <button className="mt-6 text-red-600 font-semibold w-full text-left px-4 py-2 hover:bg-red-50 rounded-md transition-colors">
                 Log Out
               </button>
             </div>
@@ -171,7 +171,7 @@ export default function SettingsPage() {
           <div className="flex-1 flex flex-col min-h-0 w-full lg:w-auto">
             {/* Top Title */}
             <div className="border-b px-4 sm:px-6 py-4 bg-white text-center lg:text-left">
-              <h1 className="text-lg sm:text-xl font-semibold">Settings</h1>
+              <h1 className="text-lg sm:text-xl font-semibold text-red-600">Settings</h1>
             </div>
 
             {/* Content Area */}
