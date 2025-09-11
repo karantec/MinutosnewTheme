@@ -58,46 +58,72 @@ const CategoriesList = () => {
     );
   }
 
-  return (
-    <section className="my-4 px-4">
-      <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8">
-        {categories.map((category) => (
-          <div 
-            key={category._id}
-            className="bg-white rounded-lg p-3 shadow-sm border border-gray-100 hover:shadow-md transition-shadow cursor-pointer"
-          >
-            <div className="aspect-square mb-2 flex items-center justify-center bg-gray-50 rounded-lg overflow-hidden">
-              <Link to="/subCategory">
-                {category.image ? (
-                  <img
-                    src={category.image}
-                    className="w-full h-full object-cover"
-                    alt={category.name}
-                    onError={(e) => {
-                      // Fallback if image fails to load
-                      e.target.style.display = 'none';
-                      e.target.nextSibling.style.display = 'flex';
-                    }}
-                  />
-                ) : null}
-                <div 
-                  className="w-full h-full flex items-center justify-center bg-red-100 text-red-600 text-2xl"
-                  style={{ display: category.image ? 'none' : 'flex' }}
-                >
-                  {category.name.charAt(0)}
-                </div>
-              </Link>
-            </div>
-            <div className="text-center">
-              <h3 className="text-sm font-medium text-gray-800 leading-tight">
-                {category.name}
-              </h3>
-            </div>
+return (
+  <section className="my-4 px-4">
+    <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8">
+      
+      {/* Static categories (from JSON) */}
+      {Categories.map((c) => (
+        <div 
+          key={`static-${c.id}`} 
+          className="bg-white rounded-lg p-3 shadow-sm border border-gray-100 hover:shadow-md transition-shadow cursor-pointer"
+        >
+          <div className="aspect-square mb-2 flex items-center justify-center bg-gray-50 rounded-lg overflow-hidden">
+            <Link to="/subCategory">
+              <img 
+                src={`categories/${c.coverFile}`} 
+                className="w-full h-full object-cover" 
+                alt={c.title} 
+              />
+            </Link>
           </div>
-        ))}
-      </div>
-    </section>
-  );
+          <div className="text-center">
+            <h3 className="text-sm font-medium text-gray-800 leading-tight">
+              {c.title}
+            </h3>
+          </div>
+        </div>
+      ))}
+
+      {/* Dynamic categories (from API) */}
+      {categories.map((category) => (
+        <div 
+          key={`api-${category._id}`} 
+          className="bg-white rounded-lg p-3 shadow-sm border border-gray-100 hover:shadow-md transition-shadow cursor-pointer"
+        >
+          <div className="aspect-square mb-2 flex items-center justify-center bg-gray-50 rounded-lg overflow-hidden">
+            <Link to="/subCategory">
+              {category.image ? (
+                <img
+                  src={category.image}
+                  className="w-full h-full object-cover"
+                  alt={category.name}
+                  onError={(e) => {
+                    e.target.style.display = 'none';
+                    e.target.nextSibling.style.display = 'flex';
+                  }}
+                />
+              ) : null}
+              <div 
+                className="w-full h-full flex items-center justify-center bg-red-100 text-red-600 text-2xl"
+                style={{ display: category.image ? 'none' : 'flex' }}
+              >
+                {category.name.charAt(0)}
+              </div>
+            </Link>
+          </div>
+          <div className="text-center">
+            <h3 className="text-sm font-medium text-gray-800 leading-tight">
+              {category.name}
+            </h3>
+          </div>
+        </div>
+      ))}
+
+    </div>
+  </section>
+);
+
 };
 
 export default CategoriesList;
