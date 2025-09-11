@@ -2,11 +2,8 @@ import React, { useState, useEffect } from "react";
 import {
   FaRegUser,
   FaShoppingCart,
-  FaChevronDown,
   FaSearch,
-  FaMapMarkerAlt,
   FaTimes,
-  FaCrosshairs,
   FaSpinner,
 } from "react-icons/fa";
 import { Link } from "react-router-dom";
@@ -15,14 +12,12 @@ import { locationService } from "../services/locationService";
 
 const Header = () => {
   const [activeCategory, setActiveCategory] = useState("All");
-  const [showLocationPopup, setShowLocationPopup] = useState(false);
-  const [recentLocations, setRecentLocations] = useState([]);
-  const [selectedLocation, setSelectedLocation] = useState("Select Location");
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [categories, setCategories] = useState([]);
   const [categoriesLoading, setCategoriesLoading] = useState(true);
   const [categoriesError, setCategoriesError] = useState(null);
-  const [searchQuery, setSearchQuery] = useState("");
+  const [selectedLocation, setSelectedLocation] = useState("Detecting location...");
+  const [locationLoading, setLocationLoading] = useState(true);
 
   // Default category icons mapping based on category names
   const getCategoryIcon = (categoryName) => {
@@ -44,6 +39,46 @@ const Header = () => {
     };
     return iconMap[categoryName] || "📦";
   };
+
+  // Auto-detect location on component mount
+  useEffect(() => {
+    const detectLocation = async () => {
+      try {
+        console.log("Auto-detecting location...");
+        const result = await locationService.getUserLocationWithAddress();
+        console.log("Location detection result:", result);
+
+        if (result.success && result.location) {
+          let locationString = "";
+          
+          if (result.location.address) {
+            locationString =
+              result.location.address.formatted ||
+              result.location.address.full ||
+              "Current Location";
+          } else {
+            locationString = "Current Location";
+          }
+          
+          console.log("Auto-detected location:", locationString);
+          setSelectedLocation(locationString);
+          
+          // Save to storage
+          locationService.saveLocationToStorage(locationString);
+        } else {
+          console.error("Location detection failed:", result);
+          setSelectedLocation("Location not available");
+        }
+      } catch (error) {
+        console.error("Error auto-detecting location:", error);
+        setSelectedLocation("Location not available");
+      } finally {
+        setLocationLoading(false);
+      }
+    };
+
+    detectLocation();
+  }, []);
 
   // Fetch categories from API
   useEffect(() => {
@@ -88,113 +123,8 @@ const Header = () => {
     fetchCategories();
   }, []);
 
-  const popularLocations = [
-    "Connaught Place, New Delhi",
-    "MG Road, Bangalore",
-    "Bandra West, Mumbai",
-    "Jubilee Hills, Hyderabad",
-    "Salt Lake City, Kolkata",
-  ];
-
-  useEffect(() => {
-    const loadRecentLocations = () => {
-      try {
-        const locations = locationService.getRecentLocations();
-        console.log("Recent locations from storage:", locations);
-        // Filter out any non-string values
-        const validLocations = locations.filter(
-          (loc) => typeof loc === "string" && loc.trim().length > 0
-        );
-        setRecentLocations(validLocations);
-      } catch (error) {
-        console.error("Error loading recent locations:", error);
-        setRecentLocations([]);
-      }
-    };
-
-    loadRecentLocations();
-  }, [showLocationPopup]); // Added dependency to refresh when popup is shown
-
-  // Select location - Fixed to handle string locations properly
-  const handleLocationSelect = (location) => {
-    try {
-      console.log("Selecting location:", location);
-
-      // Ensure we're working with a string
-      let locationString = "";
-
-      if (typeof location === "string") {
-        locationString = location;
-      } else if (location && typeof location === "object") {
-        // Handle object locations (shouldn't happen with current popular locations, but safety check)
-        locationString =
-          location.formatted ||
-          location.full ||
-          location.address ||
-          "Selected Location";
-      } else {
-        locationString = "Selected Location";
-      }
-
-      setSelectedLocation(locationString);
-
-      // Save to storage - the locationService expects a string, not an object
-      locationService.saveLocationToStorage(locationString);
-
-      // Refresh recent locations
-      const updatedLocations = locationService.getRecentLocations();
-      const validLocations = updatedLocations.filter(
-        (loc) => typeof loc === "string" && loc.trim().length > 0
-      );
-      setRecentLocations(validLocations);
-
-      setShowLocationPopup(false);
-    } catch (error) {
-      console.error("Error in handleLocationSelect:", error);
-      setSelectedLocation(
-        typeof location === "string" ? location : "Selected Location"
-      );
-      setShowLocationPopup(false);
-    }
-  };
-
-  // Detect current location - Fixed to handle the correct data structure
-  const handleUseCurrentLocation = async () => {
-    try {
-      console.log("Getting current location...");
-      const result = await locationService.getUserLocationWithAddress();
-      console.log("Location result:", result);
-
-      if (result.success && result.location) {
-        // Based on your locationService, the structure is:
-        // result.location.address.formatted or result.location.address.full
-        let locationString = "";
-
-        if (result.location.address) {
-          locationString =
-            result.location.address.formatted ||
-            result.location.address.full ||
-            "Current Location";
-        } else {
-          locationString = "Current Location";
-        }
-
-        console.log("Extracted location string:", locationString);
-        handleLocationSelect(locationString);
-      } else {
-        console.error("Location error:", result);
-        alert(result.error || "Failed to get location");
-      }
-    } catch (error) {
-      console.error("Error getting current location:", error);
-      alert("Failed to get current location");
-    }
-  };
-
   const handleCategorySelect = (categoryName) => {
     setActiveCategory(categoryName);
-    // You can add navigation logic here if needed
-    // For example: navigate to category page or filter products
   };
 
   // Sample cart items
@@ -286,93 +216,6 @@ const Header = () => {
         ></div>
       )}
 
-      {/* Location Popup Modal */}
-      {showLocationPopup && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-start justify-center pt-16">
-          <div className="bg-white w-full max-w-md rounded-t-lg overflow-hidden">
-            <div className="flex items-center justify-between p-4 border-b">
-              <h2 className="text-lg font-semibold">Choose your location</h2>
-              <button
-                onClick={() => setShowLocationPopup(false)}
-                className="p-2 rounded-full hover:bg-gray-100"
-              >
-                <FaTimes className="w-5 h-5 text-gray-600" />
-              </button>
-            </div>
-
-            <div className="p-4 border-b">
-              <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <FaSearch className="h-4 w-4 text-gray-400" />
-                </div>
-                <input
-                  type="text"
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  placeholder="Search area, street name..."
-                  className="w-full pl-10 pr-4 py-2.5 bg-gray-100 border-0 rounded-lg text-sm outline-none"
-                />
-              </div>
-            </div>
-
-            <div className="p-4 border-b">
-              <button
-                onClick={handleUseCurrentLocation}
-                className="flex items-center text-red-600 font-medium hover:bg-red-50 px-2 py-1 rounded transition-colors"
-              >
-                <FaCrosshairs className="w-4 h-4 mr-2" />
-                Use current location
-              </button>
-            </div>
-
-            {recentLocations.length > 0 && (
-              <div className="p-4 border-b">
-                <h3 className="text-sm font-medium text-gray-500 mb-2">
-                  Recent Locations
-                </h3>
-                {recentLocations.map((loc, i) => (
-                  <button
-                    key={i}
-                    onClick={() => {
-                      console.log("Clicking recent location:", loc);
-                      handleLocationSelect(loc);
-                    }}
-                    className="block w-full text-left p-2 hover:bg-gray-50 rounded-md transition-colors"
-                  >
-                    <div className="flex items-center">
-                      <FaMapMarkerAlt className="w-3 h-3 text-gray-400 mr-2" />
-                      <span className="text-sm">{loc}</span>
-                    </div>
-                  </button>
-                ))}
-              </div>
-            )}
-
-            {/* Popular Locations section */}
-            <div className="p-4">
-              <h3 className="text-sm font-medium text-gray-500 mb-2">
-                Popular Locations
-              </h3>
-              {popularLocations.map((loc, i) => (
-                <button
-                  key={i}
-                  onClick={() => {
-                    console.log("Clicking popular location:", loc);
-                    handleLocationSelect(loc);
-                  }}
-                  className="block w-full text-left p-2 hover:bg-gray-50 rounded-md transition-colors"
-                >
-                  <div className="flex items-center">
-                    <FaMapMarkerAlt className="w-3 h-3 text-gray-400 mr-2" />
-                    {loc}
-                  </div>
-                </button>
-              ))}
-            </div>
-          </div>
-        </div>
-      )}
-
       {/* Top Banner - Hidden on mobile like in the image */}
       <div className="hidden sm:block bg-red-700 text-white text-center py-1.5 px-2">
         <p className="text-xs sm:text-sm">
@@ -409,18 +252,20 @@ const Header = () => {
 
             {/* Center Section - Location & Search (Desktop) */}
             <div className="hidden md:flex items-center space-x-4 flex-1 max-w-2xl mx-4">
-              {/* Location Selector */}
+              {/* Location Display */}
               <div className="min-w-fit">
-                <button
-                  className="flex items-center space-x-2 text-gray-700 px-3 py-2 rounded-md hover:bg-gray-50 transition-colors"
-                  onClick={() => setShowLocationPopup(true)}
-                >
-                  <FaMapMarkerAlt className="w-4 h-4 text-red-600" />
-                  <span className="text-sm font-medium whitespace-nowrap max-w-[120px] truncate">
-                    {selectedLocation}
+                <div className="flex items-center space-x-2 text-gray-700 px-3 py-2">
+                  <span className="text-sm font-medium whitespace-nowrap max-w-[160px] truncate">
+                    {locationLoading ? (
+                      <span className="flex items-center">
+                        <FaSpinner className="animate-spin w-3 h-3 mr-1" />
+                        Detecting...
+                      </span>
+                    ) : (
+                      selectedLocation
+                    )}
                   </span>
-                  <FaChevronDown className="w-3 h-3 text-gray-500" />
-                </button>
+                </div>
               </div>
 
               {/* Search Bar */}
@@ -441,15 +286,18 @@ const Header = () => {
             {/* Right Section */}
             <div className="flex items-center space-x-1 sm:space-x-4">
               {/* Location on Mobile */}
-              <button
-                className="md:hidden flex items-center text-gray-700 px-2 py-1 text-sm"
-                onClick={() => setShowLocationPopup(true)}
-              >
-                <span className="font-medium max-w-[80px] truncate">
-                  {selectedLocation}
+              <div className="md:hidden flex items-center text-gray-700 px-2 py-1 text-sm">
+                <span className="font-medium max-w-[100px] truncate">
+                  {locationLoading ? (
+                    <span className="flex items-center">
+                      <FaSpinner className="animate-spin w-3 h-3 mr-1" />
+                      Detecting...
+                    </span>
+                  ) : (
+                    selectedLocation
+                  )}
                 </span>
-                <FaChevronDown className="w-3 h-3 text-gray-500 ml-1" />
-              </button>
+              </div>
 
               {/* COD Badge */}
               <div className="hidden lg:block">
