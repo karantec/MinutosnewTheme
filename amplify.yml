@@ -3,15 +3,12 @@ frontend:
   phases:
     preBuild:
       commands:
-        # Enable Corepack (bundled with Node >=16.9)
-        - corepack enable
-        # Activate Yarn 3.6.4 (matches your package.json)
-        - corepack prepare yarn@3.6.4 --activate
-        # Install dependencies using Yarn 3
-        - yarn install --immutable
+        # Install dependencies with npm
+        - npm ci
     build:
       commands:
-        - yarn build
+        # Build Vite project
+        - npm run build
   artifacts:
     baseDirectory: dist
     files:
@@ -19,4 +16,3 @@ frontend:
   cache:
     paths:
       - node_modules/**/*
-      - .yarn/cache/**/*
