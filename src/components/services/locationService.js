@@ -1,6 +1,8 @@
+// services/locationService.js
+
 export const locationService = {
   async getUserLocationWithAddress() {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
       if (!navigator.geolocation) {
         resolve({ success: false, error: "Geolocation not supported" });
       }
@@ -12,7 +14,7 @@ export const locationService = {
             lng: position.coords.longitude,
           };
 
-          // Example reverse geocode API call
+          // Example reverse geocode API call (OpenStreetMap)
           try {
             const response = await fetch(
               `https://nominatim.openstreetmap.org/reverse?lat=${coords.lat}&lon=${coords.lng}&format=json`

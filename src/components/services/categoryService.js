@@ -1,6 +1,8 @@
 // services/categoryService.js
 
-const API_BASE_URL = "https://backend.minutos.shop/api";
+// Use env variable if available, otherwise fallback to default
+const API_BASE_URL =
+  import.meta.env.VITE_API_URL || "https://backend.minutos.shop/api";
 
 export const categoryService = {
   // Get all categories
