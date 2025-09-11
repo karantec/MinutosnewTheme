@@ -1,0 +1,22 @@
+version: 1
+frontend:
+  phases:
+    preBuild:
+      commands:
+        # Enable Corepack (bundled with Node >=16.9)
+        - corepack enable
+        # Activate Yarn 3.6.4 (matches your package.json)
+        - corepack prepare yarn@3.6.4 --activate
+        # Install dependencies using Yarn 3
+        - yarn install --immutable
+    build:
+      commands:
+        - yarn build
+  artifacts:
+    baseDirectory: dist
+    files:
+      - '**/*'
+  cache:
+    paths:
+      - node_modules/**/*
+      - .yarn/cache/**/*
